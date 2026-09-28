@@ -75,7 +75,7 @@ the intended next consumer.
 
    Homepage URL, callback URL, and webhook can be left disabled or filled with a placeholder value.
 3. Install the App on both `tjwise99/wise-renovate` and every consuming repository
-   (`tjwise99/WiseKiosk`).
+   (`tjwise99/WiseKiosk`, `tjwise99/wise-ci`).
 4. Add two secrets to this repository (Settings → Secrets and variables → Actions):
    - `RENOVATE_APP_ID` — the App's **Client ID** (shown on the App's settings page; the workflow
      passes it as `create-github-app-token`'s `client-id` input, which the action's current release
