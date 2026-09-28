@@ -29,6 +29,10 @@
       "automerge": true
     },
     {
+      "matchPackageNames": ["tjwise99/**"],
+      "minimumReleaseAge": null
+    },
+    {
       "groupName": "node",
       "matchDatasources": ["node-version", "docker", "github-releases"],
       "matchPackageNames": ["node", "actions/node-versions"]
