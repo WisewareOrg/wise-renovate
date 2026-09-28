@@ -27,7 +27,7 @@ extends.
 | Setting | Value |
 |---|---|
 | Automerge scope | `minor`, `patch`, `pin`, and `digest` updates automerge on green; `major` updates wait for review |
-| Minimum release age | 3 days across ecosystems, except dependencies under `tjwise99/` (repos this account authors), which propose immediately — automerge scope for those is unchanged: `major` updates still wait for review |
+| Minimum release age | 3 days across ecosystems, except dependencies under `tjwise99/` (repos this account authors), which propose immediately |
 | Dependency Dashboard | enabled |
 | Digest pinning | GitHub Actions and Docker image references are pinned to digests (`helpers:pinGitHubActionDigests`, `docker:pinDigests`) |
 | Grouping | `node` — the node-version and Docker datasources for the `node` package, plus the github-releases datasource for `actions/node-versions` (how the `github-actions` manager reports `setup-node`'s `with: node-version`), are grouped into one PR, so `engines.node`, `setup-node`, and a Dockerfile base image move together |
@@ -48,10 +48,7 @@ Add a one-line `renovate.json` at the project's root, pinned to a preset release
 ```
 
 Then add the project's repository slug to this repo's `config.json` `repositories` list (a PR against
-this repo).
-
-Consumers: `tjwise99/WiseKiosk`, `tjwise99/wise-ci`. `meta-wisekiosk` (the Yocto appliance repo) is
-the intended next consumer.
+this repo). The runner processes exactly the repositories that list names — nothing else.
 
 ## App setup (one-time, by a repository admin)
 
@@ -74,8 +71,8 @@ the intended next consumer.
    | Metadata | Read |
 
    Homepage URL, callback URL, and webhook can be left disabled or filled with a placeholder value.
-3. Install the App on both `tjwise99/wise-renovate` and every consuming repository
-   (`tjwise99/WiseKiosk`, `tjwise99/wise-ci`).
+3. Install the App on this repository and on every repository `config.json`'s `repositories`
+   lists.
 4. Add two secrets to this repository (Settings → Secrets and variables → Actions):
    - `RENOVATE_APP_ID` — the App's **Client ID** (shown on the App's settings page; the workflow
      passes it as `create-github-app-token`'s `client-id` input, which the action's current release
