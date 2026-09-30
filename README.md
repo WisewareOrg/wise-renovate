@@ -29,6 +29,7 @@ extends.
 | Automerge scope | `minor`, `patch`, `pin`, and `digest` updates automerge on green; `major` updates wait for review |
 | Minimum release age | 3 days across ecosystems, except dependencies under `tjwise99/` (repos this account authors), which propose immediately |
 | Dependency Dashboard | enabled |
+| PR limits | none — `prHourlyLimit` and `prConcurrentLimit` are `0`, overriding Renovate's built-in 2 per hour and 10 open, so every eligible update opens its PR on the run that finds it |
 | Digest pinning | GitHub Actions and Docker image references are pinned to digests (`helpers:pinGitHubActionDigests`, `docker:pinDigests`) |
 | Grouping | `node` — the node-version and Docker datasources for the `node` package, plus the github-releases datasource for `actions/node-versions` (how the `github-actions` manager reports `setup-node`'s `with: node-version`), are grouped into one PR, so `engines.node`, `setup-node`, and a Dockerfile base image move together |
 | Base | [`config:recommended`](https://docs.renovatebot.com/presets-config/#configrecommended) |

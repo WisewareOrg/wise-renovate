@@ -11,8 +11,8 @@
   "rebaseWhen": "behind-base-branch",
   "postUpdateOptions": ["gomodTidy"],
   "platformAutomerge": true,
-  "prHourlyLimit": 2,
-  "prConcurrentLimit": 10,
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0,
   "customManagers": [
     {
       "customType": "regex",
