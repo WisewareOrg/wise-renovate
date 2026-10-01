@@ -1,4 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>tjwise99/wise-renovate#v1.2.0"]
+  "extends": ["github>WisewareOrg/wise-renovate#v1.3.0"]
 }

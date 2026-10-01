@@ -3,5 +3,5 @@
   "platform": "github",
   "onboarding": false,
   "requireConfig": "required",
-  "repositories": ["tjwise99/WiseKiosk", "tjwise99/wise-renovate", "tjwise99/wise-ci", "tjwise99/meta-wisekiosk"]
+  "repositories": ["WisewareOrg/WiseKiosk", "WisewareOrg/wise-renovate", "WisewareOrg/wise-ci", "WisewareOrg/meta-wisekiosk"]
 }

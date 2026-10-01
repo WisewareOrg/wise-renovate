@@ -1,8 +1,8 @@
 # wise-renovate
 
-The self-hosted Renovate runner for `tjwise99`'s repositories: a scheduled GitHub Actions workflow
-that runs the Renovate CLI as a GitHub App, plus the shared preset every onboarded repository
-extends.
+The self-hosted Renovate runner for the `WisewareOrg` organization's repositories: a scheduled GitHub
+Actions workflow that runs the Renovate CLI as a GitHub App, plus the shared preset every onboarded
+repository extends.
 
 ## Why self-hosted Renovate
 
@@ -27,7 +27,7 @@ extends.
 | Setting | Value |
 |---|---|
 | Automerge scope | `minor`, `patch`, `pin`, `pinDigest` (a tag gaining its digest) and `digest` updates automerge on green; `major` updates wait for review |
-| Minimum release age | 3 days across ecosystems, except dependencies under `tjwise99/` (repos this account authors), which propose immediately |
+| Minimum release age | 3 days across ecosystems, except dependencies under `WisewareOrg/` (repos this organization authors), which propose immediately |
 | Dependency Dashboard | enabled |
 | PR limits | none — `prHourlyLimit` and `prConcurrentLimit` are `0`, overriding Renovate's built-in 2 per hour and 10 open, so every eligible update opens its PR on the run that finds it |
 | Digest pinning | GitHub Actions and Docker image references are pinned to digests (`helpers:pinGitHubActionDigests`, `docker:pinDigests`) |
@@ -44,7 +44,7 @@ Add a one-line `renovate.json` at the project's root, pinned to a preset release
 ```json
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>tjwise99/wise-renovate#v1.0.0"]
+  "extends": ["github>WisewareOrg/wise-renovate#v1.4.0"]
 }
 ```
 
@@ -53,7 +53,7 @@ this repo). The runner processes exactly the repositories that list names — no
 
 ## App setup (one-time, by a repository admin)
 
-1. Create a GitHub App under the `tjwise99` account. Suggested name: `wise-renovate`.
+1. Create a GitHub App owned by the `WisewareOrg` organization. Its name is `wiseware-renovate`.
 2. Set these repository permissions exactly as Renovate's GitHub App documentation lists them
    ([docs.renovatebot.com/modules/platform/github/](https://docs.renovatebot.com/modules/platform/github/),
    "Running as a GitHub App"):
