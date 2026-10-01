@@ -44,7 +44,7 @@ Add a one-line `renovate.json` at the project's root, pinned to a preset release
 ```json
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>WisewareOrg/wise-renovate#v1.4.0"]
+  "extends": ["github>WisewareOrg/wise-renovate#v1.3.0"]
 }
 ```
 
