@@ -11,8 +11,9 @@ repository extends.
   `github-actions`, `docker`) already cover `engines.node`, `.nvmrc`, `setup-node`'s
   `with: node-version`, and Docker base image tags, so one dependency graph moves together.
 - **The bot identity is a GitHub App this org owns, not a third-party app with standing write
-  access to every repository it's installed on.** The App is created and installed by the account
-  operating this runner, scoped per-repository, and its installation tokens expire after one hour
+  access to every repository it's installed on.** The App is created and installed by the organization
+  operating this runner, installed on all of its repositories, and its installation tokens expire
+  after one hour
   ([docs.renovatebot.com/modules/platform/github/](https://docs.renovatebot.com/modules/platform/github/)).
 - **`config.json` sets no `gitAuthor`.** Running as a GitHub App already attributes commits to the
   App's own bot identity once authenticated via its installation token
