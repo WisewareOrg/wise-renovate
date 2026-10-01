@@ -17,8 +17,8 @@
     {
       "customType": "regex",
       "managerFilePatterns": ["/^renovate\\.json$/"],
-      "matchStrings": ["github>tjwise99/wise-renovate#(?<currentValue>v[0-9.]+)"],
-      "depNameTemplate": "tjwise99/wise-renovate",
+      "matchStrings": ["github>WisewareOrg/wise-renovate#(?<currentValue>v[0-9.]+)"],
+      "depNameTemplate": "WisewareOrg/wise-renovate",
       "datasourceTemplate": "github-tags",
       "versioningTemplate": "semver"
     }
@@ -29,7 +29,7 @@
       "automerge": true
     },
     {
-      "matchPackageNames": ["tjwise99/**"],
+      "matchPackageNames": ["WisewareOrg/**"],
       "minimumReleaseAge": null
     },
     {

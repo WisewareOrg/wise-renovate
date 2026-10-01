@@ -31,7 +31,7 @@ jobs:
         with:
           client-id: ${{ secrets.RENOVATE_APP_ID }}
           private-key: ${{ secrets.RENOVATE_APP_PRIVATE_KEY }}
-          owner: tjwise99
+          owner: ${{ github.repository_owner }}
 
       - name: Carry the dispatch dry-run mode into the Renovate step
         if: github.event_name == 'workflow_dispatch' && inputs.dryRun != 'none'
