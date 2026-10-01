@@ -27,7 +27,7 @@ repository extends.
 
 | Setting | Value |
 |---|---|
-| Automerge scope | `minor`, `patch`, `pin`, `pinDigest` (a tag gaining its digest) and `digest` updates automerge on green; `major` updates wait for review |
+| Automerge scope | `minor`, `patch`, `pin`, `pinDigest` (a tag gaining its digest), `digest` and `lockFileMaintenance` (a lockfile regenerated within the ranges its manifest already declares) updates automerge on green; `major` updates wait for review |
 | Minimum release age | 3 days across ecosystems, except dependencies under `WisewareOrg/` (repos this organization authors), which propose immediately |
 | Dependency Dashboard | enabled |
 | PR limits | none — `prHourlyLimit` and `prConcurrentLimit` are `0`, overriding Renovate's built-in 2 per hour and 10 open, so every eligible update opens its PR on the run that finds it |
