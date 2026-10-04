@@ -3,5 +3,5 @@
   "platform": "github",
   "onboarding": false,
   "requireConfig": "required",
-  "repositories": ["WisewareOrg/WiseKiosk", "WisewareOrg/wise-renovate", "WisewareOrg/wise-ci", "WisewareOrg/meta-wisekiosk"]
+  "repositories": ["WisewareOrg/WiseKiosk", "WisewareOrg/wise-renovate", "WisewareOrg/wise-ci", "WisewareOrg/meta-wisekiosk", "WisewareOrg/mergify-trial"]
 }
