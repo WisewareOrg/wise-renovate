@@ -9,9 +9,13 @@
   "semanticCommits": "enabled",
   "minimumReleaseAge": "3 days",
   "rebaseWhen": "behind-base-branch",
-  "prCreation": "not-pending",
+  "prCreation": "immediate",
   "postUpdateOptions": ["gomodTidy"],
-  "lockFileMaintenance": { "enabled": true },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["on monday"],
+    "minimumReleaseAgeBehaviour": "timestamp-optional"
+  },
   "platformAutomerge": true,
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
