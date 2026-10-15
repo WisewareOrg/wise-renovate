@@ -27,6 +27,14 @@
       "depNameTemplate": "WisewareOrg/wise-renovate",
       "datasourceTemplate": "github-tags",
       "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^\\.github/workflows/.*\\.ya?ml$/"],
+      "matchStrings": ["uses: WisewareOrg/wise-ci/[^@]+@(?<currentDigest>[0-9a-f]{40})"],
+      "depNameTemplate": "https://github.com/WisewareOrg/wise-ci",
+      "datasourceTemplate": "git-refs",
+      "currentValueTemplate": "main"
     }
   ],
   "packageRules": [
@@ -42,6 +50,16 @@
       "groupName": "node",
       "matchDatasources": ["node-version", "docker", "github-releases"],
       "matchPackageNames": ["node", "actions/node-versions"]
+    },
+    {
+      "groupName": "wise-ci",
+      "matchPackageNames": ["https://github.com/WisewareOrg/wise-ci"],
+      "minimumReleaseAge": null
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchPackageNames": ["WisewareOrg/wise-ci"],
+      "enabled": false
     }
   ]
 }
