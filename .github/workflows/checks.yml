@@ -1,0 +1,25 @@
+name: checks
+
+on:
+  pull_request:
+
+permissions: {}
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # `name:` equals the id, which is also the required-status-check context the `process-gates`
+  # ruleset names.
+  check-eol:
+    name: check-eol
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: WisewareOrg/wise-ci/check-eol@3de5ab33eea931ec3ec06c2f8dc6a63101c86e6a
