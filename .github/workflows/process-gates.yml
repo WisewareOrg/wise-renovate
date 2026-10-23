@@ -23,7 +23,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: WisewareOrg/wise-ci/check-branch@2d0198736667dcfa605bed89093a688745661956
+      - uses: WisewareOrg/wise-ci/check-branch@12891d02198d9b297dc8a3e992a1428197a94a17
 
   pr-title:
     name: pr-title
@@ -32,7 +32,7 @@ jobs:
       contents: read
       pull-requests: read # reads the PR's current title from the API
     steps:
-      - uses: WisewareOrg/wise-ci/pr-title@2d0198736667dcfa605bed89093a688745661956
+      - uses: WisewareOrg/wise-ci/pr-title@12891d02198d9b297dc8a3e992a1428197a94a17
 
   repo-floor:
     name: repo-floor
@@ -40,4 +40,4 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: WisewareOrg/wise-ci/repo-floor@2d0198736667dcfa605bed89093a688745661956
+      - uses: WisewareOrg/wise-ci/repo-floor@12891d02198d9b297dc8a3e992a1428197a94a17
