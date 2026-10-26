@@ -22,4 +22,4 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: WisewareOrg/wise-ci/check-eol@756206897d7765f6562127639262fa0b3a685b39
+      - uses: WisewareOrg/wise-ci/check-eol@496e1d9dd854f632d68fe60340984ca4773c942b
