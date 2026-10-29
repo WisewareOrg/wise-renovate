@@ -51,8 +51,9 @@ Add a one-line `renovate.json` at the project's root, pinned to a preset release
 }
 ```
 
-Then add the project's repository slug to this repo's `config.json` `repositories` list (a PR against
-this repo). The runner processes exactly the repositories that list names — nothing else.
+`config.json`'s `autodiscoverFilter` already matches every `WisewareOrg` repository, and
+`requireConfig: "required"` skips any repository with no `renovate.json`, so this file is the whole
+enrolment — no change lands in this repository.
 
 ## App setup (one-time, by a repository admin)
 
@@ -75,8 +76,9 @@ this repo). The runner processes exactly the repositories that list names — no
    | Metadata | Read |
 
    Homepage URL, callback URL, and webhook can be left disabled or filled with a placeholder value.
-3. Install the App on this repository and on every repository `config.json`'s `repositories`
-   lists.
+3. Install the App on this repository and on every `WisewareOrg` repository autodiscovery should
+   reach — `autodiscoverFilter` matches `WisewareOrg/*`, so that is every repository the App can
+   see.
 4. Add two secrets to this repository (Settings → Secrets and variables → Actions):
    - `RENOVATE_APP_ID` — the App's **Client ID** (shown on the App's settings page; the workflow
      passes it as `create-github-app-token`'s `client-id` input, which the action's current release
