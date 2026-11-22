@@ -110,7 +110,7 @@ version pin also drives `uv.lock` adds the relock in its own `renovate.json`:
 {
   "packageRules": [
     {
-      "matchPackageNames": ["<the regex manager's depName>"],
+      "matchPackageNames": ["<the regex manager's packageName>"],
       "postUpgradeTasks": {
         "commands": ["uv lock"],
         "installTools": { "python": {}, "uv": {} },
@@ -122,15 +122,22 @@ version pin also drives `uv.lock` adds the relock in its own `renovate.json`:
 }
 ```
 
-`python` is listed because `uv lock` may build local packages; `fileFilters` limits the commit to `uv.lock`;
-`executionMode: "branch"` runs the command once per branch. `installTools` is required: `uv` is not on the Renovate image's PATH (Renovate installs it on demand, only
-for its own `uv` calls), so without it `uv lock` fails with `command not found`. `installTools` has no
-effect under `binarySource=global`; `config.json` does not set `binarySource`, so Renovate's default,
-`install`, applies.
+The manager's `packageName` is its `depName` unless the manager sets `packageNameTemplate`;
+`matchPackageNames` matches `packageName`, so a rule written against the wrong one never fires and
+the lock stays stale without an error.
 
-`allowedCommands` is runner-global: it takes effect on the next scheduled run after this repository's
-default branch gains it, with no preset tag bump in consumers. A command is matched in full against `allowedCommands`, so `uv lock --upgrade` or a chained
-command is refused.
+- **`installTools` is required.** `uv` is not on the Renovate image's PATH (Renovate installs it on
+  demand, only for its own `uv` calls), so without it `uv lock` fails with `command not found`.
+  containerbase installs `uv` under its own `python`, and tools install in key order, so `python`
+  is listed and listed first; `install-tool uv` alone fails with a missing-parent error.
+  `installTools` has no effect under `binarySource=global`; `config.json` does not set
+  `binarySource`, so Renovate's default, `install`, applies.
+- **`fileFilters`** limits the commit to `uv.lock`; **`executionMode: "branch"`** runs the command
+  once per branch.
+- **The match is anchored.** Renovate tests each pattern anywhere in the command, so it is the
+  `^` and `$` that make `uv lock --upgrade` or a chained command refused.
+- **`allowedCommands` is runner-global.** It takes effect on the next scheduled run after this
+  repository's default branch gains it, with no preset tag bump in consumers.
 
 ## Releasing the preset
 
