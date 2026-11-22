@@ -99,9 +99,50 @@ The `dryRun` input selects Renovate's dry-run mode for that run:
 
 The scheduled run (every 6 hours, `0 */6 * * *`) never sets a dry-run mode.
 
+## Post-upgrade `uv lock`
+
+`config.json` sets `allowedCommands` to `["^uv lock$"]`: the only command a repository's
+`postUpgradeTasks` may run on this runner is exactly `uv lock`. A custom (regex) manager has no
+artifact step, so Renovate never relocks `uv.lock` on its PRs; a repository whose regex-managed
+version pin also drives `uv.lock` adds the relock in its own `renovate.json`:
+
+```json
+{
+  "packageRules": [
+    {
+      "matchPackageNames": ["<the regex manager's packageName>"],
+      "postUpgradeTasks": {
+        "commands": ["uv lock"],
+        "installTools": { "python": {}, "uv": {} },
+        "fileFilters": ["uv.lock"],
+        "executionMode": "branch"
+      }
+    }
+  ]
+}
+```
+
+The manager's `packageName` is its `depName` unless the manager sets `packageNameTemplate`;
+`matchPackageNames` matches `packageName`, so a rule written against the wrong one never fires and
+the lock stays stale without an error.
+
+- **`installTools` is required.** `uv` is not on the Renovate image's PATH (Renovate installs it on
+  demand, only for its own `uv` calls), so without it `uv lock` fails with `command not found`.
+  containerbase installs `uv` under its own `python`, and tools install in key order, so `python`
+  is listed and listed first; `install-tool uv` alone fails with a missing-parent error.
+  `installTools` has no effect under `binarySource=global`; `config.json` does not set
+  `binarySource`, so Renovate's default, `install`, applies.
+- **`fileFilters`** limits the commit to `uv.lock`; **`executionMode: "branch"`** runs the command
+  once per branch.
+- **The match is anchored.** Renovate tests each pattern anywhere in the command, so it is the
+  `^` and `$` that make `uv lock --upgrade` or a chained command refused.
+- **`allowedCommands` is runner-global.** It takes effect on the next scheduled run after this
+  repository's default branch gains it, with no preset tag bump in consumers.
+
 ## Releasing the preset
 
-Tag a release when `default.json` (or `config.json`) changes:
+Tag a release when `default.json` changes (`config.json` is read from this repository's default branch by
+the runner and needs no tag):
 
 ```
 git tag vX.Y.Z

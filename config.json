@@ -4,5 +4,6 @@
   "onboarding": false,
   "requireConfig": "required",
   "autodiscover": true,
-  "autodiscoverFilter": ["WisewareOrg/*"]
+  "autodiscoverFilter": ["WisewareOrg/*"],
+  "allowedCommands": ["^uv lock$"]
 }
