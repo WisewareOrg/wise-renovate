@@ -120,15 +120,19 @@ version pin also drives `uv.lock` adds the relock in its own `renovate.json`:
 }
 ```
 
-`installTools` is required: the runner's Renovate image does not ship `uv` (it is installed on demand,
-and only for Renovate's own `uv` calls), so without it `uv lock` fails with `command not found`.
-`installTools` has no effect under `binarySource=global`; this runner uses the image default,
-`install`. A command is matched in full against `allowedCommands`, so `uv lock --upgrade` or a chained
+`installTools` is required: `uv` is not on the Renovate image's PATH (Renovate installs it on demand, only
+for its own `uv` calls), so without it `uv lock` fails with `command not found`. `installTools` has no
+effect under `binarySource=global`; `config.json` does not set `binarySource`, so Renovate's default,
+`install`, applies.
+
+`allowedCommands` is runner-global: it takes effect on the next scheduled run after this repository's
+default branch gains it, with no preset tag bump in consumers. A command is matched in full against `allowedCommands`, so `uv lock --upgrade` or a chained
 command is refused.
 
 ## Releasing the preset
 
-Tag a release when `default.json` (or `config.json`) changes:
+Tag a release when `default.json` changes (`config.json` is read from this repository's default branch by
+the runner and needs no tag):
 
 ```
 git tag vX.Y.Z
