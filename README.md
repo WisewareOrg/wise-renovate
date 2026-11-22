@@ -99,6 +99,33 @@ The `dryRun` input selects Renovate's dry-run mode for that run:
 
 The scheduled run (every 6 hours, `0 */6 * * *`) never sets a dry-run mode.
 
+## Post-upgrade `uv lock`
+
+`config.json` sets `allowedCommands` to `["^uv lock$"]`: the only command a repository's
+`postUpgradeTasks` may run on this runner is exactly `uv lock`. A custom (regex) manager has no
+artifact step, so Renovate never relocks `uv.lock` on its PRs; a repository whose regex-managed
+version pin also drives `uv.lock` adds the relock in its own `renovate.json`:
+
+```json
+{
+  "packageRules": [
+    {
+      "matchPackageNames": ["<the regex manager's depName>"],
+      "postUpgradeTasks": {
+        "commands": ["uv lock"],
+        "installTools": { "uv": {} }
+      }
+    }
+  ]
+}
+```
+
+`installTools` is required: the runner's Renovate image does not ship `uv` (it is installed on demand,
+and only for Renovate's own `uv` calls), so without it `uv lock` fails with `command not found`.
+`installTools` has no effect under `binarySource=global`; this runner uses the image default,
+`install`. A command is matched in full against `allowedCommands`, so `uv lock --upgrade` or a chained
+command is refused.
+
 ## Releasing the preset
 
 Tag a release when `default.json` (or `config.json`) changes:
