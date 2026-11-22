@@ -113,14 +113,17 @@ version pin also drives `uv.lock` adds the relock in its own `renovate.json`:
       "matchPackageNames": ["<the regex manager's depName>"],
       "postUpgradeTasks": {
         "commands": ["uv lock"],
-        "installTools": { "uv": {} }
+        "installTools": { "python": {}, "uv": {} },
+        "fileFilters": ["uv.lock"],
+        "executionMode": "branch"
       }
     }
   ]
 }
 ```
 
-`installTools` is required: `uv` is not on the Renovate image's PATH (Renovate installs it on demand, only
+`python` is listed because `uv lock` may build local packages; `fileFilters` limits the commit to `uv.lock`;
+`executionMode: "branch"` runs the command once per branch. `installTools` is required: `uv` is not on the Renovate image's PATH (Renovate installs it on demand, only
 for its own `uv` calls), so without it `uv lock` fails with `command not found`. `installTools` has no
 effect under `binarySource=global`; `config.json` does not set `binarySource`, so Renovate's default,
 `install`, applies.
