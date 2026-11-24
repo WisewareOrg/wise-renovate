@@ -43,7 +43,7 @@
       "automerge": true
     },
     {
-      "matchPackageNames": ["WisewareOrg/**", "https://github.com/WisewareOrg/**"],
+      "matchPackageNames": ["**/WisewareOrg/**"],
       "minimumReleaseAge": null
     },
     {
@@ -53,7 +53,8 @@
     },
     {
       "groupName": "wise-ci",
-      "matchPackageNames": ["https://github.com/WisewareOrg/wise-ci"]
+      "matchPackageNames": ["https://github.com/WisewareOrg/wise-ci"],
+      "minimumReleaseAge": null
     },
     {
       "matchManagers": ["github-actions"],
