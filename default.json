@@ -47,14 +47,18 @@
       "minimumReleaseAge": null
     },
     {
+      "description": "A git-refs commit carries no release timestamp, so a release-age wait would hold it forever.",
+      "matchDatasources": ["git-refs"],
+      "minimumReleaseAge": null
+    },
+    {
       "groupName": "node",
       "matchDatasources": ["node-version", "docker", "github-releases"],
       "matchPackageNames": ["node", "actions/node-versions"]
     },
     {
       "groupName": "wise-ci",
-      "matchPackageNames": ["https://github.com/WisewareOrg/wise-ci"],
-      "minimumReleaseAge": null
+      "matchPackageNames": ["https://github.com/WisewareOrg/wise-ci"]
     },
     {
       "matchManagers": ["github-actions"],
