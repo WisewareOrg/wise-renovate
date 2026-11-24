@@ -43,12 +43,7 @@
       "automerge": true
     },
     {
-      "matchPackageNames": ["WisewareOrg/**"],
-      "minimumReleaseAge": null
-    },
-    {
-      "description": "A git-refs commit carries no release timestamp, so a release-age wait would hold it forever.",
-      "matchDatasources": ["git-refs"],
+      "matchPackageNames": ["WisewareOrg/**", "https://github.com/WisewareOrg/**"],
       "minimumReleaseAge": null
     },
     {
