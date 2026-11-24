@@ -43,7 +43,7 @@
       "automerge": true
     },
     {
-      "matchPackageNames": ["WisewareOrg/**"],
+      "matchPackageNames": ["**/WisewareOrg/**"],
       "minimumReleaseAge": null
     },
     {
